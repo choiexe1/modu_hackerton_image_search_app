@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppSearchBar extends StatelessWidget {
-  const AppSearchBar({super.key});
+  final TextEditingController controller;
+  final Function(String) onSubmit;
+
+  const AppSearchBar({
+    super.key,
+    required this.controller,
+    required this.onSubmit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +20,8 @@ class AppSearchBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
+        onSubmitted: (value) => onSubmit(value),
+        controller: controller,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: 'Search',
