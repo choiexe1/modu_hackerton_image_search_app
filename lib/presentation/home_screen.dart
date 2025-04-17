@@ -8,7 +8,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(padding: EdgeInsets.all(16.0), child: AppSearchBar()),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 33),
+          child: Column(spacing: 24, children: [AppSearchBar()]),
+        ),
       ),
     );
   }
