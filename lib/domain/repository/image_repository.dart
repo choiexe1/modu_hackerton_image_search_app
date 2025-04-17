@@ -1,5 +1,6 @@
-import 'package:modu_image_search_app/domain/model/image.dart';
+import 'package:modu_image_search_app/domain/model/custom_image.dart';
 
 abstract interface class ImageRepository {
-  Future<List<Image>> searchImage(String query);
+  Future<List<CustomImage>> searchImage(String query);
+  Future<CustomImage> getImageDetail(int id);
 }
