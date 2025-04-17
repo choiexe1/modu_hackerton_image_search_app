@@ -9,19 +9,16 @@ import 'package:modu_image_search_app/domain/model/image.dart';
 
 class PixabayApiDataSourceImpl implements PixabayApiDataSource {
   static const String apiUrl = 'https://pixabay.com/api/';
-  final DotEnv _env;
+
+  final String _apiKey;
   final http.Client _client;
 
-  PixabayApiDataSourceImpl(this._env, this._client) {
-    _env.load();
-  }
+  const PixabayApiDataSourceImpl(this._apiKey, this._client);
 
   @override
   Future<List<Image>> search(String query) async {
-    final String apiKey = _env['PIXABAY_API_KEY']!;
-
     final String url =
-        '$apiUrl?key=$apiKey&q=$query&image_type=photo&per_page=3';
+        '$apiUrl?key=$_apiKey&q=$query&image_type=photo&per_page=3';
     final http.Response response = await _client.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
