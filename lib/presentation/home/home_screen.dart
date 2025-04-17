@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modu_image_search_app/presentation/component/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-
-  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +14,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             spacing: 24,
             children: [
-              AppSearchBar(
-                controller: controller,
-                onSubmit: (value) => debugPrint(value),
-              ),
+              AppSearchBar(onSubmit: (value) => context.go('/image/$value')),
             ],
           ),
         ),
