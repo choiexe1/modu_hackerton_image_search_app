@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:dotenv/dotenv.dart';
 import 'package:modu_image_search_app/data/data_source/pixabay_api_data_source.dart';
 import 'package:modu_image_search_app/data/dto/image_dto.dart';
 import 'package:modu_image_search_app/data/mapper/image_mapper.dart';
@@ -18,7 +17,7 @@ class PixabayApiDataSourceImpl implements PixabayApiDataSource {
   @override
   Future<List<Image>> search(String query) async {
     final String url =
-        '$apiUrl?key=$_apiKey&q=$query&image_type=photo&per_page=3';
+        '$apiUrl?key=$_apiKey&q=$query&image_type=photo&per_page=8';
     final http.Response response = await _client.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
