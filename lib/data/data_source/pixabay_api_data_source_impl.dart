@@ -1,0 +1,42 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:dotenv/dotenv.dart';
+import 'package:modu_image_search_app/data/data_source/pixabay_api_data_source.dart';
+import 'package:modu_image_search_app/data/dto/image_dto.dart';
+import 'package:modu_image_search_app/data/mapper/image_mapper.dart';
+import 'package:modu_image_search_app/domain/model/image.dart';
+
+class PixabayApiDataSourceImpl implements PixabayApiDataSource {
+  static const String apiUrl = 'https://pixabay.com/api/';
+  final DotEnv _env;
+  final http.Client _client;
+
+  PixabayApiDataSourceImpl(this._env, this._client) {
+    _env.load();
+  }
+
+  @override
+  Future<List<Image>> search(String query) async {
+    final String apiKey = _env['PIXABAY_API_KEY']!;
+
+    final String url =
+        '$apiUrl?key=$apiKey&q=$query&image_type=photo&per_page=3';
+    final http.Response response = await _client.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = jsonDecode(response.body);
+
+      final List<dynamic> images = data['hits'];
+
+      List<ImageDTO> dtos =
+          images
+              .cast<Map<String, dynamic>>()
+              .map((e) => ImageDTO.fromJson(e))
+              .toList();
+
+      return dtos.map((dto) => dto.toModel()).toList();
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+}
