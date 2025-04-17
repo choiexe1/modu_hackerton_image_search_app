@@ -1,5 +1,6 @@
-import 'package:modu_image_search_app/domain/model/image.dart';
+import 'package:modu_image_search_app/domain/model/custom_image.dart';
 
 abstract interface class PixabayApiDataSource {
-  Future<List<Image>> search(String query);
+  Future<List<CustomImage>> search(String query);
+  Future<CustomImage> getDetail(int id);
 }
