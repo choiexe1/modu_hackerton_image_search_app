@@ -1,13 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'image.freezed.dart';
+part 'custom_image.freezed.dart';
 
 @freezed
-abstract class Image with _$Image {
-  const factory Image({
+abstract class CustomImage with _$CustomImage {
+  const factory CustomImage({
     required int id,
     required String username,
     required Set<String> tags,
     required String imageUrl,
-  }) = _Image;
+  }) = _CustomImage;
 }
