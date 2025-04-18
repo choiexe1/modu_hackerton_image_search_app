@@ -39,7 +39,6 @@ class PixabayApiDataSourceImpl implements PixabayApiDataSource {
   @override
   Future<CustomImage> getDetail(int id) async {
     final String url = '$apiUrl?key=$_apiKey&id=$id';
-    // '$apiUrl?key=$_apiKey&q=$query&image_type=photo&per_page=8';
     final http.Response response = await _client.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);

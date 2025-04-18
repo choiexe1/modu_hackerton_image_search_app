@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:modu_image_search_app/core/di_setup.dart';
 import 'package:modu_image_search_app/core/routing/router.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  diSetup();
   runApp(const MyApp());
 }
 
